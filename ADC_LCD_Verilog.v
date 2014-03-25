@@ -1,17 +1,17 @@
 module ADC_CTRL (iRST, iCLK, iCLK_n, iGO, iCH, oLED, oDIN, oCS_n, oSCLK, iDOUT, lcd_rs, lcd_e, data1);
 			
 input	iRST,iCLK, iCLK_n, iGO;
-input	[2:0]	iCH;
-output[7:0]	oLED;
-output oDIN, oCS_n, oSCLK;
+input	[2:0] iCH;
+output  [7:0] oLED;
+output  oDIN, oCS_n, oSCLK;
 input	iDOUT;
 
 reg data, go_en;
-wire [2:0]	ch_sel;
-reg sclk;
+wire [2:0] ch_sel;
 reg [3:0]  cont;
 reg [3:0]  m_cont;
 reg [11:0] adc_data;
+reg sclk;
 integer xval; 
 integer xval2; 
 reg [7:0] led;
@@ -31,22 +31,22 @@ assign oLED   =	 led;
 always@(posedge iGO or negedge iRST)
 begin
 	if(!iRST)
-		go_en	<=	0;
+		go_en	<=  0;
 	else
 	begin
 		if(iGO)
-		go_en	<=	1;
+		go_en	<=  1;
 	end
 end
 
 always@(posedge iCLK or negedge go_en)
 begin
 	if(!go_en)
-		cont	<=	0;
+		cont	<=  0;
 	else
 	begin
 		if(iCLK)
-		cont	<=	cont + 1;
+		cont	<=  cont + 1;
 	end
 end
 
@@ -59,19 +59,19 @@ end
 always@(posedge iCLK_n or negedge go_en)
 begin
 	if(!go_en)
-		data	<=	0;
+		data	<=  0;
 	else
 	begin
 		if(iCLK_n)
 		begin
 			if (cont == 2)
-				data	<=	iCH[2];
+				data  <=  iCH[2];
 			else if (cont == 3)
-				data	<=	iCH[1];
+				data  <=  iCH[1];
 			else if (cont == 4)
-				data	<=	iCH[0];
+				data  <= iCH[0];
 			else
-				data	<=	0;
+				data  <=  0;
 		end
 	end
 end
@@ -80,8 +80,8 @@ always@(posedge iCLK or negedge go_en)
 begin
 	if(!go_en)
 	begin
-		adc_data	<=	0;
-		led			<=	8'h00;
+		adc_data  <=	0;
+		led	  <=	8'h00;
 	end
 	else
 	begin
@@ -92,28 +92,27 @@ begin
 			else if (m_cont == 5)
 				adc_data[10]	<=	iDOUT;
 			else if (m_cont == 6)
-				adc_data[9]		<=	iDOUT;
+				adc_data[9]	<=	iDOUT;
 			else if (m_cont == 7)
-				adc_data[8]		<=	iDOUT;
+				adc_data[8]	<=	iDOUT;
 			else if (m_cont == 8)
-				adc_data[7]		<=	iDOUT;
+				adc_data[7]	<=	iDOUT;
 			else if (m_cont == 9)
-				adc_data[6]		<=	iDOUT;
+				adc_data[6]	<=	iDOUT;
 			else if (m_cont == 10)
-				adc_data[5]		<=	iDOUT;
+				adc_data[5]	<=	iDOUT;
 			else if (m_cont == 11)
-				adc_data[4]		<=	iDOUT;
+				adc_data[4]	<=	iDOUT;
 			else if (m_cont == 12)
-				adc_data[3]		<=	iDOUT;
+				adc_data[3]	<=	iDOUT;
 			else if (m_cont == 13)
-				adc_data[2]		<=	iDOUT;
+				adc_data[2]	<=	iDOUT;
 			else if (m_cont == 14)
-				adc_data[1]		<=	iDOUT;
-				
+				adc_data[1]	<=	iDOUT;
 			else if (m_cont == 15)
-				adc_data[0]		<=	iDOUT;
+				adc_data[0]	<=	iDOUT;
 			else if (m_cont == 1)
-				led	<=	adc_data[11:4];
+				led     	<=	adc_data[11:4];
 		end
 	end
 end
@@ -182,11 +181,8 @@ Datas[20] = 8'h31;
 else Datas[20] = 8'h30;
 
 Datas[21] = 8'hC0;
-
 Datas[22] = 8'h44;
-
 Datas[23] = 8'h3A;
-
 Datas[24] = 8'h20;
 
 xval = adc_data;
@@ -248,13 +244,9 @@ case (xval/10)
 endcase;
 
 Datas[29] = 8'h20;
-
 Datas[30] = 8'h56;
-
 Datas[31] = 8'h3A;
-
 Datas[32] = 8'h20;
-
 Datas[34] = 8'h2E;
 
 xval2 = ((xval2 * 330) / 4095);
