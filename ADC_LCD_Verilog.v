@@ -23,7 +23,7 @@ integer j = 1;
 reg [7:0] Datas [1:36];
 
 assign oCS_n  =  ~go_en;
-assign oSCLK  =  (go_en)? iCLK:1;
+assign oSCLK  =  (go_en)? iCLK:1 ;
 assign oDIN	  =	data;
 assign ch_sel =	iCH;
 assign oLED	  =	led;
