@@ -1,4 +1,5 @@
 module LCD_DISPLAY(clk, lcd_e, lcd_rs, data);
+
 input clk;
 output reg lcd_e, lcd_rs;
 output reg [7:0] data;
