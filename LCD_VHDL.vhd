@@ -25,13 +25,13 @@ begin
           elsif i = 2000000 then j := j + 1; i := 0;
           end if;
 
-			 if j <= 5 then lcd_rs <= '0';   -- Command Signal --
+	  if j <= 5 then lcd_rs <= '0';   -- Command Signal --
           elsif (j > 5 and j< 22) then lcd_rs <= '1';   --- Data Signal -- 
-			 elsif j = 22 then lcd_rs <= '0';
-			 elsif j > 22 then lcd_rs <= '1';
+	  elsif j = 22 then lcd_rs <= '0';
+	  elsif j > 22 then lcd_rs <= '1';
           end if;
 
-			 if j = 26 then j := 5; -- Repeat Data Display Routine --
+	  if j = 26 then j := 5; -- Repeat Data Display Routine --
           end if;
        end if;
       end process proc1;
