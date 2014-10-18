@@ -3,27 +3,27 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity ADC_LCD is
-port(Clk   		  :   IN  STD_LOGIC;  
-	  iGO   		  :   IN  STD_LOGIC := '0';
-     oDIN  		  :   OUT STD_LOGIC;
-     oCS_n 		  :   OUT STD_LOGIC;
-     oSCLK 		  :   OUT STD_LOGIC;
-     iDOUT 		  :   IN  STD_LOGIC;
-     iCH   		  :   IN  STD_LOGIC_VECTOR(2 downto 0);	  
-	  LCD_RS      :   OUT STD_LOGIC;
+port(Clk   	 :   IN  STD_LOGIC;  
+     iGO         :   IN  STD_LOGIC := '0';
+     oDIN        :   OUT STD_LOGIC;
+     oCS_n       :   OUT STD_LOGIC;
+     oSCLK       :   OUT STD_LOGIC;
+     iDOUT       :   IN  STD_LOGIC;
+     iCH   	 :   IN  STD_LOGIC_VECTOR(2 downto 0);	  
+     LCD_RS      :   OUT STD_LOGIC;
      LCD_E       :   OUT STD_LOGIC;	
-	  LCD_DataOut :   OUT STD_LOGIC_VECTOR(7 downto 0));
+     LCD_DataOut :   OUT STD_LOGIC_VECTOR(7 downto 0));
 end entity;
 
 architecture ADC_LCD_arc of ADC_LCD is
 
 component LCD_Disp is
-port( Clk      	 : IN  STD_LOGIC := '0';
-      LCD_RS   	 : OUT STD_LOGIC;
-      LCD_E     	: OUT STD_LOGIC;	
-      LCD_DataIn  : IN  STD_LOGIC_VECTOR(11 downto 0) := "000000000000";
-      WaveSel   	: IN  STD_LOGIC_VECTOR(2 downto 0);
-      LCD_DataOut : OUT STD_LOGIC_VECTOR(7 downto 0));
+port( Clk      	  :  IN  STD_LOGIC := '0';
+      LCD_RS   	  :  OUT STD_LOGIC;
+      LCD_E       :  OUT STD_LOGIC;	
+      LCD_DataIn  :  IN  STD_LOGIC_VECTOR(11 downto 0) := "000000000000";
+      WaveSel     :  IN  STD_LOGIC_VECTOR(2 downto 0);
+      LCD_DataOut :  OUT STD_LOGIC_VECTOR(7 downto 0));
 end component;
 
 component ADCModule is
