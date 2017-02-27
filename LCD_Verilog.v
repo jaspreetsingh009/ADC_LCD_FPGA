@@ -42,6 +42,8 @@ end
 		
 always @(posedge clk) begin
 
+//-- Delay for writing data
+	
   if (i <= 1000000) begin
   i = i + 1; lcd_e = 1;
   data = Datas[j];
